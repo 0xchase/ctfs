@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 import angr
+import IPython
+import claripy
 
-project = angr.Project("r100", auto_load_libs=False)
+proj = angr.Project("baby2")
+s = proj.factory.entry_state(args=[claripy.BVS('arg_1',50*8)])
 
-@project.hook(0x400844)
-def print_flag(state):
-    print("FLAG SHOULD BE:", state.posix.dumps(0))
-    project.terminate_execution()
+simgr = proj.factory.simgr(s)
+print(simgr.explore(find=lambda s: b"Correct" in s.posix.dumps(1)))
 
-project.execute()
+#print(simgr.deadended[0].posix.dumps(0))
+#print(simgr.deadended[0].posix.dumps(1))
+IPython.embed()
+
