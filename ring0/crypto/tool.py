@@ -6,8 +6,14 @@
 # Print command automatically colors anything with flag, ctf, or { and }
 # Sequence commands with ;
 # Get capital lettors
-# Variable rotation amount
+# Variable shift amount, different alphabets
 # base16/32
+# vigenere cipher
+# Number array to ascii
+# Transportation cipher
+# RSACTFTool - Recover private key with various attacks
+# RSATool - Generate private key using p and q
+# FeatherDuster - Automated tool
 
 import codecs
 import os
@@ -51,10 +57,14 @@ def main():
 			print_val(b64(val))
 		if cmd[0] == "xor":
 			print_vals(xor(val))
-		if cmd[0] == "caesar":
-			print_vals(caesar(val))
+		if cmd[0] == "shift":
+			print_vals(shift(val))
 		if cmd[0] == "getupper":
 			print_val(getupper(val))
+		if cmd[0] == "replace":
+			print_val(replace(val, cmd[1], cmd[2]))
+		if cmd[0] == "remove":
+			print_val(replace(val, cmd[1], ""))
 		if cmd[0] == "history":
 			for i in history:
 				print_val(i)
@@ -74,10 +84,11 @@ def main():
 def help():
 	print("input, read, update")
 	print("rot13, base64, xor, getupper")
+	print("replace, remove")
 	print("history, brute, clear, exit")
 
 # NOT WORKING
-def caesar(plaintext):
+def shift(plaintext):
 	arr = []
 	for shift in range(26):
 		alphabet = string.ascii_lowercase
@@ -85,6 +96,9 @@ def caesar(plaintext):
 		table = string.maketrans(alphabet, shifted_alphabet)
 		arr.append(plaintext.translate(table))
 	return arr
+
+def replace(val, a, b):
+	return val.replace(a, b)
 
 def getupper(val):
 	s = ""
