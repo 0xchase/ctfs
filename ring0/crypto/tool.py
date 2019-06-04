@@ -15,9 +15,11 @@ import base64
 
 form = "FLAG"
 found_flag = False
+last = ""
 
 def main():
 	global found_flag
+	global last
 
 	history = []
 	val = "RU9CRC43aWdxNDsxaWtiNTFpYk9PMDs6NDFS"
@@ -39,7 +41,9 @@ def main():
 				val = f.read()
 			history.append(val)
 			print(val)
-
+		if cmd[0] == "update":
+			history.append(val)
+			val = last
 		if cmd[0] == "rot13":
 			print_val(rot13(val))
 		if cmd[0] == "base64":
@@ -65,7 +69,7 @@ def main():
 			exit()
 
 def help():
-	print("input, read")
+	print("input, read, update")
 	print("rot13, base64, xor, getupper")
 	print("history, brute, clear, exit")
 
@@ -134,6 +138,7 @@ def is_flag(val):
 
 def print_val(val):
 	global form
+	global last
 
 	if val == None:
 		print("Invalid string")
@@ -152,6 +157,7 @@ def print_val(val):
 		print(OKGREEN + val + ENDC)
 	else:
 		print(val)
+	last = val
 
 def scan():
 	print("Not implemented")
