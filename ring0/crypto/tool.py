@@ -12,6 +12,7 @@
 import codecs
 import os
 import base64
+import string
 
 form = "FLAG"
 found_flag = False
@@ -50,6 +51,8 @@ def main():
 			print_val(b64(val))
 		if cmd[0] == "xor":
 			print_vals(xor(val))
+		if cmd[0] == "caesar":
+			print_vals(caesar(val))
 		if cmd[0] == "getupper":
 			print_val(getupper(val))
 		if cmd[0] == "history":
@@ -72,6 +75,16 @@ def help():
 	print("input, read, update")
 	print("rot13, base64, xor, getupper")
 	print("history, brute, clear, exit")
+
+# NOT WORKING
+def caesar(plaintext):
+	arr = []
+	for shift in range(26):
+		alphabet = string.ascii_lowercase
+		shifted_alphabet = alphabet[shift:] + alphabet[:shift]
+		table = string.maketrans(alphabet, shifted_alphabet)
+		arr.append(plaintext.translate(table))
+	return arr
 
 def getupper(val):
 	s = ""
