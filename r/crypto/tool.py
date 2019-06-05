@@ -1,19 +1,18 @@
 #!/usr/bin/python3
 
-# Figure out best way to layer: update command lists value
 # Scan tries everything on layer
-# Brute tries everything with no bad characters or failures recursivley
 # Print command automatically colors anything with flag, ctf, or { and }
 # Sequence commands with ;
-# Get capital lettors
 # Variable shift amount, different alphabets
-# base16/32
 # vigenere cipher
 # Number array to ascii
 # Transportation cipher
 # RSACTFTool - Recover private key with various attacks
 # RSATool - Generate private key using p and q
 # FeatherDuster - Automated tool
+# If contains all letters but scrambled, print in yellow
+# Rsa package: decrypt with private, etc
+
 
 import codecs
 import os

@@ -1,0 +1,3 @@
+It's a substitution cipher
+
+Can be solved with https://quipqiup.com/

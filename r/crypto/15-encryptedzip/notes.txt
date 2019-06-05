@@ -1,3 +1,5 @@
 Can crack using:
 
 pkcrack -C weird.zip -c "weird.txt" -P weird-nopass.zip -p "weird.txt" -a
+
+fcrackzip -v -D -u -p /usr/share/wordlists/rockyou.txt flag.zip
