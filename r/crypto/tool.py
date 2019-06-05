@@ -19,6 +19,7 @@ import codecs
 import os
 import base64
 import string
+from bubblepy import BubbleBabble
 
 form = "FLAG"
 found_flag = False
@@ -32,7 +33,7 @@ def main():
 	val = "RU9CRC43aWdxNDsxaWtiNTFpYk9PMDs6NDFS"
 	val = "SYNTPrfneVfPbbyOhgAbgFrpher"
 	val = "Ayowe awxewr nwaalfw die tiy rgw fklf ua xgixiklrw! Tiy lew qwkxinw."
-	print("input, rot13, exit")
+	help()
 	while True:
 		print(">> ", end="")
 		cmd2 = input()
@@ -57,12 +58,28 @@ def main():
 			print_val(rot13(val))
 		if cmd[0] == "base64":
 			print_val(b64(val))
+		if cmd[0] == "base32":
+			print_val(b32(val))
+		if cmd[0] == "base16":
+			print_val(b16(val))
 		if cmd[0] == "xor":
 			print_vals(xor(val))
+		if cmd[0] == "baconian":
+			print_val(baconian(val))
+			temp = val.lower()
+			temp = temp.replace("a", "B")
+			temp = temp.replace("b", "A")
+			print_val(baconian(temp))
 		if cmd[0] == "shift":
 			print_vals(shift(val))
+		if cmd[0] == "bubblebabble":
+			print_val(bubblebabble(val))
 		if cmd[0] == "getupper":
 			print_val(getupper(val))
+		if cmd[0] == "tolower":
+			print_val(tolower(val))
+		if cmd[0] == "toupper":
+			print_val(toupper(val))
 		if cmd[0] == "replace":
 			print_val(replace(val, cmd[1], cmd[2]))
 		if cmd[0] == "remove":
@@ -84,10 +101,11 @@ def main():
 			exit()
 
 def help():
-	print("input, read, update")
-	print("rot13, base64, xor, getupper")
-	print("replace, remove")
-	print("history, brute, clear, exit")
+	print(" Inputs:	input, read, update")
+	print(" Ciphers:	rot13, xor, shift, bubblebabble, baconian")
+	print(" Decoders:	base64, base32, base16")
+	print(" Mod:		replace, remove, getupper, toupper, tolower")
+	print(" Utility:	history, brute, clear, exit")
 
 # NOT WORKING
 def shift(message):
@@ -108,8 +126,66 @@ def shift(message):
 		ret.append(translated)
 	return ret
 
+
+def baconian(message):
+	lookup = {'A':'aaaaa', 'B':'aaaab', 'C':'aaaba', 'D':'aaabb', 'E':'aabaa', 'F':'aabab', 'G':'aabba', 'H':'aabbb', 'I':'abaaa', 'J':'abaab', 'K':'ababa', 'L':'ababb', 'M':'abbaa', 'N':'abbab', 'O':'abbba', 'P':'abbbb', 'Q':'baaaa', 'R':'baaab', 'S':'baaba', 'T':'baabb', 'U':'babaa', 'V':'babab', 'W':'babba', 'X':'babbb', 'Y':'bbaaa', 'Z':'bbaab'}
+	failures = 0
+
+	message = message.lower()
+	decipher = '' 
+	i = 0
+	while True: 
+		if(i < len(message)-4): 
+			substr = message[i:i + 5] 
+			if(substr[0] != ' '): 
+				try:
+					decipher += list(lookup.keys())[list(lookup.values()).index(substr)] 
+				except:
+					failures += 1
+				i += 5
+			else: 
+				decipher += ' '
+				i += 1
+		else: 
+			break
+	if failures > 0:
+		print("Encountered " + str(failures) + " lookup failures")
+	return decipher
+
+def bubblebabble(val):
+	bb = BubbleBabble()
+	try:
+		return str(bb.decode(val).decode("utf-8"))
+	except:
+		return None
+
 def replace(val, a, b):
-	return val.replace(a, b)
+	ret = ""
+	if a == "upper":
+		print("Replacing upper case")
+		for i in val:
+			if i.isupper():
+				ret += b
+			else:
+				ret += i
+		return ret
+	elif a == "lower":
+		print("replaceing lower case")
+		for i in val:
+			if i.islower():
+				ret += b
+			else:
+				ret += i
+		return ret
+	elif a == "space" or a == "spaces":
+		return val.replace(" ", b)
+	elif a == "symbols":
+		s = "!@#$%^&*,.\'"
+		for c in s:
+			val = val.replace(c, b)
+		return val
+	else:
+		return val.replace(a, b)
 
 def getupper(val):
 	s = ""
@@ -117,6 +193,12 @@ def getupper(val):
 		if c.isupper():
 			s += c
 	return s
+
+def toupper(val):
+	return val.upper()
+
+def tolower(val):
+	return val.lower()
 
 def xor(val):
 	arr = []
@@ -136,6 +218,16 @@ def b64(val):
 		return base64.b64decode(val).decode("utf-8")
 	except:
 		return None
+def b32(val):
+	try:
+		return base64.b32decode(val).decode("utf-8")
+	except:
+		return None
+def b16(val):
+	try:
+		return base64.b16decode(val).decode("utf-8")
+	except:
+		return None
 
 def print_vals(vals):
 	for i in vals:
@@ -143,6 +235,9 @@ def print_vals(vals):
 
 def brute(val, depth, path):
 	global found_flag
+
+	if depth == 0:
+		print("Do these once")
 
 	if depth > 4 or val == None or found_flag:
 		return None

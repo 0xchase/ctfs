@@ -1,0 +1,3 @@
+hackingbubble
+
+Solution: It is a bubblebabble cipher
