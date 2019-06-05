@@ -1,1 +1,0 @@
- Connect to it sandbox.ringzer0team.com on port 60000 (netcat is a good client) 
