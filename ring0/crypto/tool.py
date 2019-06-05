@@ -17,6 +17,7 @@
 # Change form to contents
 # Add start variable. Will highlight characters in correct location
 # Add end variable. Will highlight characters in correct location
+# Make brute smarter. Different rotations based on contents
 
 import codecs
 import os
