@@ -218,7 +218,7 @@ def tolower(val):
 
 def xor(val):
 	arr = []
-	for j in range(16):
+	for j in range(1, 16):
 		f = ''.join(chr(ord(i) ^ j) for i in val)
 		arr.append(f)
 	return arr
@@ -255,25 +255,35 @@ def brute(val, depth, path):
 	if depth == 0:
 		print("Do these once")
 
-	if depth > 4 or val == None or found_flag:
+	if depth > 3 or val == None or found_flag:
 		return None
 
 	arr = []
-	arr.append((rot13(val), path + ["rot13"]))
+
+	if not "rot13" in path:
+		arr.append((rot13(val), path + ["rot13"]))
 	arr.append((b64(val), path + ["b64"]))
-	k = 0
-	for a in xor(val):
-		arr.append((a, path + ["xor " + str(k)]))
-		k = k + 1
+
+	if not "xor" in path:
+		k = 1
+		for a in xor(val):
+			#arr.append((a, path + ["xor " + str(k)]))
+			arr.append((a, path + ["xor"]))
+			k = k + 1
+
+	if not "shift" in path:
+		for a in shift(val):
+			arr.append((a, path + ["shift"]))
 	
 	for i, j in arr:
 		if i == None:
 			pass
 		elif is_flag(i):
-			found_flag = True
+			#found_flag = True
 			print(j)
 			print_val(i)
-			return
+			#return
+			brute(i, (depth + 1), j)
 		else:
 			brute(i, (depth + 1), j)
 
@@ -283,7 +293,7 @@ def is_flag(val):
 	if val == None:
 		return
 
-	if form.lower() in val:
+	if form.lower() in val.lower():
 		return True
 	else:
 		return False
