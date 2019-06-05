@@ -10,7 +10,6 @@
 # RSACTFTool - Recover private key with various attacks
 # RSATool - Generate private key using p and q
 # FeatherDuster - Automated tool
-# If contains all letters but scrambled, print in yellow
 # Rsa package: decrypt with private, etc
 
 
@@ -183,6 +182,8 @@ def replace(val, a, b):
 		for c in s:
 			val = val.replace(c, b)
 		return val
+	elif a == "newline" or a == "newlines":
+		return val.replace("\n", b)
 	else:
 		return val.replace(a, b)
 
@@ -266,11 +267,20 @@ def is_flag(val):
 	if val == None:
 		return
 
-	if form in val:
+	if form.lower() in val:
 		return True
 	else:
 		return False
 	
+def like_flag(val):
+	global form
+	contains = True
+	
+	for c in form.lower():
+		if not c in val:
+			contains = False
+
+	return contains
 
 def print_val(val):
 	global form
@@ -288,11 +298,14 @@ def print_val(val):
 	ENDC = '\033[0m'
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
-
-	if is_flag(val):
+	
+	if is_flag(val.lower()):
 		print(OKGREEN + val + ENDC)
+	elif like_flag(val.lower()):
+		print(WARNING + val + ENDC)
 	else:
 		print(val)
+
 	last = val
 
 def scan():
