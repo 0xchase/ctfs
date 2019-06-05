@@ -69,11 +69,11 @@ def main():
 			for i in history:
 				print_val(i)
 		if cmd[0] == "brute":
-			try:
-				found_flag = False
-				brute(val, 0)
-			except:
-				print("Exception")
+			#try:
+			found_flag = False
+			brute(val, 0, [])
+			#except Exception as e:
+			#	print(e)
 		if cmd[0] == "help":
 			help()
 		if cmd[0] == "clear":
@@ -130,26 +130,30 @@ def print_vals(vals):
 	for i in vals:
 		print_val(i)
 
-def brute(val, depth):
+def brute(val, depth, path):
 	global found_flag
 
 	if depth > 4 or val == None or found_flag:
 		return None
 
 	arr = []
-	arr.append(rot13(val))
-	arr.append(b64(val))
-	arr += xor(val)
+	arr.append((rot13(val), path + ["rot13"]))
+	arr.append((b64(val), path + ["b64"]))
+	k = 0
+	for a in xor(val):
+		arr.append((a, path + ["xor " + str(k)]))
+		k = k + 1
 	
-	for i in arr:
+	for i, j in arr:
 		if i == None:
 			pass
 		elif is_flag(i):
 			found_flag = True
+			print(j)
 			print_val(i)
 			return
 		else:
-			brute(i, depth + 1)
+			brute(i, depth + 1, j)
 
 def is_flag(val):
 	global form
