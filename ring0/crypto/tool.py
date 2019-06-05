@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# Substitution cipher for default challenge
 # Scan tries everything on layer
 # Print command automatically colors anything with flag, ctf, or { and }
 # Sequence commands with ;
@@ -11,7 +12,11 @@
 # RSATool - Generate private key using p and q
 # FeatherDuster - Automated tool
 # Rsa package: decrypt with private, etc
-
+# crack: built in john commands with rockyou.txt. Links to websites with crackers.
+# Everything in the pycipher docs
+# Change form to contents
+# Add start variable. Will highlight characters in correct location
+# Add end variable. Will highlight characters in correct location
 
 import codecs
 import os
@@ -26,6 +31,7 @@ last = ""
 def main():
 	global found_flag
 	global last
+	global form
 
 	history = []
 	val = "RU9CRC43aWdxNDsxaWtiNTFpYk9PMDs6NDFS"
@@ -52,6 +58,11 @@ def main():
 		if cmd[0] == "update":
 			history.append(val)
 			val = last
+		if cmd[0] == "form":
+			if len(cmd) > 1:
+				form = cmd[1]
+			else:
+				print(form)
 		if cmd[0] == "rot13":
 			print_val(rot13(val))
 		if cmd[0] == "base64":
@@ -95,19 +106,26 @@ def main():
 			help()
 		if cmd[0] == "clear":
 			os.system("clear")
-		if cmd[0] == "exit":
+		if cmd[0] == "exit" or cmd[0] == "q":
 			exit()
 
 def help():
 	print(" Inputs:	input, read, update")
 	print(" Ciphers:	rot13, xor, shift, bubblebabble, baconian")
 	print(" Decoders:	base64, base32, base16")
-	print(" Mod:		replace, remove, getupper, toupper, tolower")
+	print(" Mod:		remove, getupper, toupper, tolower")
+	print(" Replace:	upper, lower, symbols, newlines, spaces")
 	print(" Utility:	history, brute, clear, exit")
 
-# NOT WORKING
-def shift(message):
-	LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+def shift(val):
+	letters = ["abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"]
+	ret = []
+	for i in letters:
+		ret += shift2(val, i)
+	return ret
+
+def shift2(message, LETTERS):
+	#LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 	ret = []
 
 	for key in range(len(LETTERS)):
@@ -160,7 +178,6 @@ def bubblebabble(val):
 def replace(val, a, b):
 	ret = ""
 	if a == "upper":
-		print("Replacing upper case")
 		for i in val:
 			if i.isupper():
 				ret += b
@@ -168,7 +185,6 @@ def replace(val, a, b):
 				ret += i
 		return ret
 	elif a == "lower":
-		print("replaceing lower case")
 		for i in val:
 			if i.islower():
 				ret += b
