@@ -1,0 +1,2 @@
+['rot13', 'rot13', 'b64', 'xor 3']
+FLAG-4jdr782jha62jaLL38972Q

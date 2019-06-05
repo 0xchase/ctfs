@@ -1,0 +1,2 @@
+openssl rsautl -decrypt -in flag.enc -out plaintext.txt -inkey private.pem
+FLAG-vOAM5ZcReMNzJqOfxLauakHx
