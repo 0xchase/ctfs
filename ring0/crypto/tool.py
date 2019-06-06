@@ -17,7 +17,7 @@
 # Change form to contents
 # Add start variable. Will highlight characters in correct location
 # Add end variable. Will highlight characters in correct location
-# Make brute smarter. Different rotations based on contents
+# Make shift smarter. Different rotations based on contents
 
 import codecs
 import os
@@ -125,7 +125,7 @@ def help():
 	print(" Utility:	system, history, brute, clear, exit")
 
 def shift(val):
-	letters = ["abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"]
+	letters = ["abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"]
 	ret = []
 	for i in letters:
 		ret += shift2(val, i)
@@ -259,8 +259,10 @@ def print_vals(vals):
 
 def brute(val, depth, path):
 	global found_flag
-
+	global form
+	
 	if depth == 0:
+		print("Form is: " + form)
 		print("One time decodes:")
 		print_val(bubblebabble(val))
 		print("Recursive:")
@@ -270,7 +272,7 @@ def brute(val, depth, path):
 
 	arr = []
 
-	if not "rot13" in path:
+	if not "rot13" in path and not "shift" in path:
 		arr.append((rot13(val), path + ["rot13"]))
 	arr.append((b64(val), path + ["b64"]))
 
@@ -281,7 +283,7 @@ def brute(val, depth, path):
 			arr.append((a, path + ["xor"]))
 			k = k + 1
 
-	if not "shift" in path:
+	if not "shift" in path and not "rot13" in path:
 		for a in shift(val):
 			arr.append((a, path + ["shift"]))
 	
