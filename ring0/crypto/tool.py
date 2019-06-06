@@ -52,8 +52,8 @@ def main():
 				history.append(val)
 				print_val(val)
 		if cmd[0] == "read":
-			with open(cmd[1], 'r') as f:
-				val = f.read()
+			with codecs.open(cmd[1], 'r') as f:
+				val = f.read().strip("\n").strip(" ")
 			history.append(val)
 			print(val)
 		if cmd[0] == "update":
@@ -64,6 +64,8 @@ def main():
 				form = cmd[1]
 			else:
 				print(form)
+		if cmd[0] == "system":
+			os.system(cmd[1])
 		if cmd[0] == "rot13":
 			print_val(rot13(val))
 		if cmd[0] == "base64":
@@ -71,6 +73,10 @@ def main():
 		if cmd[0] == "base32":
 			print_val(b32(val))
 		if cmd[0] == "base16":
+			print_val(b16(val))
+		if cmd[0] == "bases":
+			print_val(b64(val))
+			print_val(b32(val))
 			print_val(b16(val))
 		if cmd[0] == "xor":
 			print_vals(xor(val))
@@ -113,10 +119,10 @@ def main():
 def help():
 	print(" Inputs:	input, read, update")
 	print(" Ciphers:	rot13, xor, shift, bubblebabble, baconian")
-	print(" Decoders:	base64, base32, base16")
+	print(" Decoders:	bases, base64, base32, base16")
 	print(" Mod:		remove, getupper, toupper, tolower")
 	print(" Replace:	upper, lower, symbols, newlines, spaces")
-	print(" Utility:	history, brute, clear, exit")
+	print(" Utility:	system, history, brute, clear, exit")
 
 def shift(val):
 	letters = ["abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"]
@@ -170,10 +176,11 @@ def baconian(message):
 	return decipher
 
 def bubblebabble(val):
+	val = val.strip("\n")
 	bb = BubbleBabble()
 	try:
 		return str(bb.decode(val).decode("utf-8"))
-	except:
+	except Exception as e:
 		return None
 
 def replace(val, a, b):
@@ -254,7 +261,9 @@ def brute(val, depth, path):
 	global found_flag
 
 	if depth == 0:
-		print("Do these once")
+		print("One time decodes:")
+		print_val(bubblebabble(val))
+		print("Recursive:")
 
 	if depth > 3 or val == None or found_flag:
 		return None
