@@ -23,6 +23,8 @@ import codecs
 import os
 import base64
 import string
+import webbrowser
+import itertools
 from bubblepy import BubbleBabble
 
 form = "FLAG"
@@ -96,6 +98,19 @@ def main():
 			print_val(tolower(val))
 		if cmd[0] == "toupper":
 			print_val(toupper(val))
+		if cmd[0] == "zip":
+			if len(cmd) < 3:
+				print("zip brute <zip file>")
+			elif cmd[1] == "brute":
+				os.system("fcrackzip -v -D -u -p rockyou.txt " + cmd[2])
+		if cmd[0] == "sub":
+			print("https://quipqiup.com/")
+			webbrowser.open('https://quipqiup.com', new=2)
+		if cmd[0] == "vig":
+			if len(cmd) < 1:
+				print("vig key")
+			else:
+				vig(val, cmd[1], 'd')
 		if cmd[0] == "replace":
 			print_val(replace(val, cmd[1], cmd[2]))
 		if cmd[0] == "remove":
@@ -118,7 +133,7 @@ def main():
 
 def help():
 	print(" Inputs:	input, read, update")
-	print(" Ciphers:	rot13, xor, shift, bubblebabble, baconian")
+	print(" Ciphers:	rot13, xor, shift, sub, bubblebabble, baconian")
 	print(" Decoders:	bases, base64, base32, base16")
 	print(" Mod:		remove, getupper, toupper, tolower")
 	print(" Replace:	upper, lower, symbols, newlines, spaces")
@@ -149,6 +164,49 @@ def shift2(message, LETTERS):
 		ret.append(translated)
 	return ret
 
+
+
+def vig(txt='', key='', typ='d'):
+	if not txt:
+		print('Needs text')
+		return
+	if not key:
+		print('Needs key')
+		return
+	if typ not in ('d', 'e'):
+		print('Type must be "d" or "e"')
+		return
+
+	k_len = len(key)
+	k_ints = [ord(i) for i in key]
+	txt_ints = [ord(i) for i in txt]
+	ret_txt = ''
+	for i in range(len(txt_ints)):
+		adder = k_ints[i % k_len]
+		if typ == 'd':
+			adder *= -1
+
+		v = (txt_ints[i] - 32 + adder) % 95
+
+		ret_txt += chr(v + 32)
+
+	print(ret_txt)
+	return ret_txt
+
+#def vig(message, key, nothing):
+#	decrypted = ""
+#	for letter, key_i in zip(message, itertools.cycle(key)):
+#		if ord(letter) - ord(key_i) < ord('A'):
+#			new_key = ord('A') - (ord(letter) - ord(key_i))
+#			new_letter = chr(91 - ord(new_key))
+#			decrypted += new_letter
+#		else:
+#			decrypted += chr(ord(letter) - ord(key_i))
+#	print(decrypted)
+#	return decrypted
+
+print("Trying vig...")
+vig("KDERE2UNX1W1H96GYQNUSQT1KPGB", "fselkladfklklakl", 'd')
 
 def baconian(message):
 	lookup = {'A':'aaaaa', 'B':'aaaab', 'C':'aaaba', 'D':'aaabb', 'E':'aabaa', 'F':'aabab', 'G':'aabba', 'H':'aabbb', 'I':'abaaa', 'J':'abaab', 'K':'ababa', 'L':'ababb', 'M':'abbaa', 'N':'abbab', 'O':'abbba', 'P':'abbbb', 'Q':'baaaa', 'R':'baaab', 'S':'baaba', 'T':'baabb', 'U':'babaa', 'V':'babab', 'W':'babba', 'X':'babbb', 'Y':'bbaaa', 'Z':'bbaab'}
