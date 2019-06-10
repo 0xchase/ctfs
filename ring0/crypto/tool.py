@@ -4,7 +4,6 @@
 # Scan tries everything on layer
 # Print command automatically colors anything with flag, ctf, or { and }
 # Sequence commands with ;
-# Variable shift amount, different alphabets
 # vigenere cipher
 # Number array to ascii
 # Transportation cipher
@@ -18,6 +17,7 @@
 # Add start variable. Will highlight characters in correct location
 # Add end variable. Will highlight characters in correct location
 # Make shift smarter. Different rotations based on contents
+# Convert binary --> ascii, convert hex --> ascii, etc
 
 import codecs
 import os
@@ -137,6 +137,7 @@ def help():
 	print(" Decoders:	bases, base64, base32, base16")
 	print(" Mod:		remove, getupper, toupper, tolower")
 	print(" Replace:	upper, lower, symbols, newlines, spaces")
+	print(" Zip:		zip brute")
 	print(" Utility:	system, history, brute, clear, exit")
 
 def shift(val):
@@ -260,7 +261,7 @@ def replace(val, a, b):
 	elif a == "space" or a == "spaces":
 		return val.replace(" ", b)
 	elif a == "symbols":
-		s = "!@#$%^&*,.\'"
+		s = "!@#$%^&*,.\'\"()[]{}_-+=`~:;\\<>|"
 		for c in s:
 			val = val.replace(c, b)
 		return val
@@ -408,3 +409,4 @@ def scan():
 	print("Not implemented")
 
 main()
+
