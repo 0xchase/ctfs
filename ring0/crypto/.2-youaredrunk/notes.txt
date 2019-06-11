@@ -2,5 +2,5 @@ It's a substitution cipher
 
 Can be solved with https://quipqiup.com/
 
-Super secret message for you the glag is chocolate! You are welcome.
+Super secret message for you the flag is chocolate! You are welcome.
 
