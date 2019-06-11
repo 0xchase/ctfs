@@ -1,0 +1,2 @@
+Once again those guys at TotalSecure are releasing crypto software! They designed a new system based on elliptic curves after the flaws were found in their last piece of software. Here's a copy of their new software and a message we intercepted, figure out what it says!
+

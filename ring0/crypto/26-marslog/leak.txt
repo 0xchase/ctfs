@@ -1,0 +1,12 @@
+send("[+] Send MarsLog Authorization Key: ")
+VALID_CMD = 'AccessID: SysAdmin - CMD: showlog'
+try:
+    key = RSA.importKey(b64decode(clean(rfile.readline())))
+    if key.d > 17 and key.e % 2 == 1:
+        key = PKCS1_v1_5.new(key)
+        command = key.decrypt(b64decode(enc_cmd), None)
+
+    if command != VALID_CMD:
+        send("\n[!] Verification failed! Access denied.\n")
+        send("\n--[END]--\n")
+        end(self)

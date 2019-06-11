@@ -1,0 +1,3 @@
+The server for data logging of Mars launches was recently exposed to the public! In order to ensure only certain parties can execute certain commands the administrators require users to encrypt and decrypt their commands for verification before execution. Can you connect and view the launch security log? We found a leaked snippet of the server code which should help. 
+
+The server is running on challenges.ringzer0team.com 10290
