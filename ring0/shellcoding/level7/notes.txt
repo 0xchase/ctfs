@@ -1,0 +1,6 @@
+Execute your shellcode 
+
+User: level7
+Password: level6 flag
+
+sssh challenges.ringzer0team.com port 10127

@@ -1,0 +1,6 @@
+Execute your shellcode 
+
+User: level1
+Password: 50g8O1R0C42nP7N
+
+ssh challenges.ringzer0team.com port 10127
