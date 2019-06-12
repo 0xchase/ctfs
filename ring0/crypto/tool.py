@@ -18,6 +18,7 @@
 # Add end variable. Will highlight characters in correct location
 # Make shift smarter. Different rotations based on contents
 # Convert binary --> ascii, convert hex --> ascii, etc
+# XOR two strings together
 
 import codecs
 import os
