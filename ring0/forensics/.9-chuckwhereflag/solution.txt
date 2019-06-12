@@ -1,0 +1,7 @@
+Use wireshark to extract all objects to a folder
+
+Look for flag using strings in every file using loop:
+for filename in /home/chase/temp/*; do echo $filename && strings $filename | grep -i flag; done
+
+/home/chase/temp/askldj3lkj234.php
+Hey this is a flag FLAG-GehFMsqCeNvof5szVpB2Dmjx

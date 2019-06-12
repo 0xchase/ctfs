@@ -1,0 +1,4 @@
+Extract with tar
+Run strings on hidden file
+
+Flag-1s4g76jk89f

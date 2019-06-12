@@ -1,0 +1,13 @@
+Deflated environment file is too big. Extract elsewhere
+
+Use volatility for envars
+
+F l a g - 66d7724d872da91af56907aea0f6bfb8
+
+Some other solution...
+Or use strings with envars and search around
+F$L%A^G-5bd2510a83e82d271b7bf7fa4e0970d1
+
+Notes:
+Interesting DumpIt.exe in the pslist
+Also notepad.exe is open
