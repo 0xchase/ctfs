@@ -1,0 +1,1 @@
+strings file | grep -i flag

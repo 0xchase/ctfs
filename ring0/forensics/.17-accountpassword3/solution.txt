@@ -1,0 +1,5 @@
+volatility -f file --profile=______ hashdump
+
+flag:1000:aad3b435b51404eeaad3b435b51404ee:3008c87294511142799dca1191e69a0f:::
+
+Throw it in a hash cracker: admin123
