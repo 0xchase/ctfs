@@ -1,0 +1,7 @@
+1VR0DekIWV_hxeVmj3RDZMmg2TRnDin5ltO9AJM_u1s
+
+Something to do  with this???
+nslookup -q=txt ringzer0team.com
+
+dig ringzer0team.com ANY
+d7Auq4mA18vZrybJKdYqrAHpF6nLZuX2x0vgjm66MhM

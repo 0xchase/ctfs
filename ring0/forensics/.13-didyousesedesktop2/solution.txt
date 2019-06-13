@@ -1,0 +1,6 @@
+volatility -f environment --profile Win7SP0x86 cmdline
+
+Command line : "C:\Windows\system32\NOTEPAD.EXE" C:\Users\flag\Desktop\F$L%A^G-5bd2510a83e82d271b7bf7fa4e0970d1.txt
+
+F$L%A^G-5bd2510a83e82d271b7bf7fa4e0970d1
+
