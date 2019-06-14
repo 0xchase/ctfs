@@ -93,6 +93,8 @@ def main():
 			print_vals(shift(val))
 		if cmd[0] == "bubblebabble":
 			print_val(bubblebabble(val))
+		if cmd[0] == "hex":
+			print_val(hex_decode(val))
 		if cmd[0] == "getupper":
 			print_val(getupper(val))
 		if cmd[0] == "tolower":
@@ -135,11 +137,17 @@ def main():
 def help():
 	print(" Inputs:	input, read, update")
 	print(" Ciphers:	rot13, xor, shift, sub, bubblebabble, baconian")
-	print(" Decoders:	bases, base64, base32, base16")
+	print(" Decoders:	hex, bases, base64, base32, base16")
 	print(" Mod:		remove, getupper, toupper, tolower")
 	print(" Replace:	upper, lower, symbols, newlines, spaces")
 	print(" Zip:		zip brute")
 	print(" Utility:	system, history, brute, clear, exit")
+
+def hex_decode(val):
+	try:
+		return bytes.fromhex(val).decode('utf-8')
+	except:
+		return None
 
 def shift(val):
 	letters = ["abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"]

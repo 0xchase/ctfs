@@ -1,0 +1,6 @@
+DNS is quered with long hex subdomain
+Append all these subdomains together into a hex string
+Then hex decode the strings, and base64 decode that
+
+This is a secret transmitted through dns query :) FLAG-FT47cMX26pWyFSI6RPWaSr5YRw
+
