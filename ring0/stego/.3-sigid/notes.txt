@@ -1,0 +1,5 @@
+Use spectrogram in sonic-visualiser
+Edit screenshot with gimp
+Scan QR code: https://zxing.org/w/decode
+
+the flag is : mathsRulesTheUniverse

@@ -1,0 +1,4 @@
+# User: level1
+# Pass: level1
+echo level1
+ssh level1@challenges.ringzer0team.com -p 10228
