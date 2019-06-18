@@ -3,4 +3,4 @@ ld -o main.x main.o
 ./main.x
 
 rm main.o
-rm main.x
+#rm main.x
