@@ -8,6 +8,7 @@ import subprocess
 # Can auto encode with simple encoder than pushes onto stack, increments, and jumps
 # Can change file with "f" or "file"
 # Move badchars to text file for persistance
+# Fix badchar detection only in hex columns
 
 shellcode_mode = True
 
@@ -55,7 +56,7 @@ def main():
 				f.write(code)
 			os.system("gcc -fno-stack-protector -z execstack main.c -o main.x")
 			os.system("./main.x")
-			os.system("rm main.c && rm main.x")
+			os.system("rm main.c && rm main.o && rm main.x")
 		elif cmd[0] == "g2":
 			os.system("nasm -f elf64 -o main.o main.s")
 			os.system("ld -o main.x main.o")
@@ -67,7 +68,8 @@ def main():
 				f.write(code)
 			os.system("gcc -fno-stack-protector -z execstack main.c -o main.x")
 			os.system("gdb -q main.x")
-			os.system("rm main.c && rm main.x")
+			os.system("rm main.c && rm main.o && rm main.x")
+			#os.system("rm peda*")
 		elif cmd[0] == "a":
 			print(assemble(cmd2[2:]))
 		elif cmd[0] == "p":
