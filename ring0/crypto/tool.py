@@ -19,6 +19,7 @@
 # Make shift smarter. Different rotations based on contents
 # Convert binary --> ascii, convert hex --> ascii, etc
 # XOR two strings together
+# Make shift not include strings == to the input
 
 import codecs
 import os
@@ -106,6 +107,8 @@ def main():
 				print("zip brute <zip file>")
 			elif cmd[1] == "brute":
 				os.system("fcrackzip -v -D -u -p rockyou.txt " + cmd[2])
+		if cmd[0] == "length":
+			print(str(len(val)))
 		if cmd[0] == "sub":
 			print("https://quipqiup.com/")
 			webbrowser.open('https://quipqiup.com', new=2)
@@ -141,6 +144,7 @@ def help():
 	print(" Mod:		remove, getupper, toupper, tolower")
 	print(" Replace:	upper, lower, symbols, newlines, spaces")
 	print(" Zip:		zip brute")
+	print(" Info:		length")
 	print(" Utility:	system, history, brute, clear, exit")
 
 def hex_decode(val):

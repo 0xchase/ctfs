@@ -1,0 +1,26 @@
+Script started on Mon 17 Jun 2019 02:28:05 PM EDT
+./file.x: line 1: Script: command not found
+./file.x: line 2: bash:: command not found
+./file.x: line 3: Usage:: command not found
+bash: [GNU: No such file or directory
+./file.x: line 5: GNU: command not found
+./file.x: line 6: $'--debug\r': command not found
+./file.x: line 7: $'--debugger\r': command not found
+./file.x: line 8: $'--dump-po-strings\r': command not found
+./file.x: line 9: $'--dump-strings\r': command not found
+./file.x: line 10: $'--help\r': command not found
+./file.x: line 11: $'--init-file\r': command not found
+./file.x: line 12: $'--login\r': command not found
+./file.x: line 13: $'--noediting\r': command not found
+./file.x: line 14: $'--noprofile\r': command not found
+./file.x: line 15: $'--norc\r': command not found
+./file.x: line 16: $'--posix\r': command not found
+./file.x: line 17: $'--rcfile\r': command not found
+./file.x: line 18: $'--restricted\r': command not found
+./file.x: line 19: $'--verbose\r': command not found
+./file.x: line 20: $'--version\r': command not found
+./file.x: line 21: Shell: command not found
+./file.x: line 22: syntax error near unexpected token `('
+./file.x: line 22: `	-ilrsD or -c command or -O shopt_option		(invocation only)'
+
+Script done on Mon 17 Jun 2019 02:28:05 PM EDT

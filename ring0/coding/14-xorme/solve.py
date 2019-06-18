@@ -23,27 +23,18 @@ def process(data):
 	print("")
 	
 	b = base64.b64decode(b)
-	print(b)
 
 	print("Lengths: " + str(len(a)) + " " + str(len(b)))
 
-	c = ""
-	for i in range(0, len(a)):
-		c += str(ord(a[i]) ^ b[i])
+	for k in range(1, len(a)-10):
+		c = ""
+		for i in range(k, k + 10):
+			c += str(chr(ord(a[i]) ^ b[i]))
 
-	print(c)
-	
-
-	for i in range(0, 10000):
-		m = hashlib.sha1()
-		m.update(str(i).encode())
-		h = m.hexdigest()
-		if h == data:
-			ret = str(i)
+		print(c)
 	
 	exit()	
-			
-
+	
 	print("-"*80)
 	print(ret)
 	return ret

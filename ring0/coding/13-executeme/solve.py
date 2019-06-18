@@ -4,37 +4,35 @@ from lxml import html
 import requests
 import hashlib
 import re
+import os
+import subprocess
 
 session = "7uvlvl1ci3tho8pdl2pgrp7ag0"
-challenge = "57"
+challenge = "125"
 
 
 def process(data):
 	#data = int(data, base=2)
-	data = data.split("\n")
-	h = data[1]
-	s = data[7]
+	code = data
+	program = "char code[] = \"" + code + "\";int main(int argc, char **argv){	int (*ret)() = (int(*)())code;	ret();}"
+
+	text_file = open("file.c", "w")
+	text_file.write(program)
+	text_file.close()
+
+	os.system("gcc -z execstack -fno-stack-protector file.c -o file.x")
+	os.system("script -c ./file.x output.txt")
 	
-	h = h.replace("<br />", "").replace(" ", "").replace("	", "")
-	s = s.replace("<br />", "").replace(" ", "").replace("	", "")
-	print(h)
-	print(s)
-	
+	f = open("output.txt", "r")
+	ret = f.read().split("\n")[1]
 
-	for i in range(0, 10000):
-		m = hashlib.sha1()
-		m.update((str(i) + s).encode())
-		hashed = m.hexdigest()
-		#print(str(i) + s)
-		#print(" --> " + hashed)
-		if hashed == data:
-			print("Found it")
-			ret = str(i)
+	print("")
+	print("Printed: " + ret)
 
-	print("Not found")
-	exit()	
-			
+	exit()
 
+
+	#exit()
 	print("-"*80)
 	print(ret)
 	return ret
@@ -53,18 +51,9 @@ def main():
 
 	tree = html.fromstring(page.content)
 	message = tree.xpath('/html/body/div[2]/div/div[2]/div/text()[2]').pop().strip()
-	message = ""
-
-	is_m = False
-	for line in text.split("\n"):
-		if "BEGIN HASH" in line:
-			is_m = True
-		elif "END SALT" in line:
-			is_m = False
-		elif is_m:
-			message = message + "\n" + line
 
 	print("="*35 + " Input " + "="*35)
+	print(message)
 	result = process(message)
 
 	answerUrl = 'https://ringzer0team.com/challenges/' + challenge + "/" + result
@@ -74,10 +63,16 @@ def main():
 	print("")
 
 
+	for l in data:
+		if "FLAG" in l:
+			print("Found flag:")
+		else:
+			print("No flag")
+
 	try:
 		flag = re.findall(r"FLAG-\w+",data[1])
 		print(flag)
 	except:
-		print("No flag")
+		pass
 
 main()
