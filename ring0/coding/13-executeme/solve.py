@@ -20,7 +20,7 @@ def process(data):
 	text_file.write(program)
 	text_file.close()
 
-	os.system("gcc -z execstack -fno-stack-protector file.c -o file.x")
+	os.system("gcc -z execstack -fno-stack-protector -Wall file.c -o file.x")
 	os.system("script -c ./file.x output.txt")
 	
 	f = open("output.txt", "r")
