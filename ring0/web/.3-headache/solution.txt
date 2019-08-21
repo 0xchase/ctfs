@@ -1,0 +1,2 @@
+In burp intercept get request response. Flag is in the flag header.
+
