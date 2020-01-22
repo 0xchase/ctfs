@@ -1,0 +1,1 @@
+r2 buggy -c "aaa;db 0x00400966;db 0x00400925;ood;dc;echo ===================; echo wx ef1904ecb29dc0822d6a49fef2610295 at rdi;echo px 16 at rdi"
