@@ -1,0 +1,5 @@
+FLAG-ak3j3ka2892569
+
+Emulate binary, skipping over the library calls, to the compare with v0 and v1. Take v0 value, convert to integer, and combine it with the printf(FLAG-ak3j3ka...) to get
+
+FLAG-ak3j3ka2892569
