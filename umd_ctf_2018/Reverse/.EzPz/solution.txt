@@ -1,0 +1,4 @@
+UMDCTF-{IH0p3_YoU_d1dnT_SpEND_too_MucH_TimE_ON_TH1S}
+
+Objdump file and tail for end, use to break on loop point
+Watch stack, flag will appear
