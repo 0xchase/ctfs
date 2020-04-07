@@ -1,0 +1,3 @@
+Find group policy cpassword using grep -ri pass.
+This can be decrypted using the decrypt script. This script is from a gpp-decrypt kali utility.
+
