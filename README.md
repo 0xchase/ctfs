@@ -6,3 +6,4 @@
  - how2heap
  - Flare CTF
  - Ring0 challenges
+ - Rhme hardware hacking CTF
