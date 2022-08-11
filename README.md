@@ -7,6 +7,7 @@
  - Flare CTF
  - Ring0 challenges
  - Rhme hardware hacking CTF
+ - xorpd
 
 ## Books
 
