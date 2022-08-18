@@ -1,13 +1,13 @@
 # CTFs
 
 ### Important
- - UMD CTF
+ - Ring0
+ - FlareOn
  - RPI binary exploitation
- - how2heap
- - Flare CTF
- - Ring0 challenges
 
 ### Secondary
+ - UMD CTF
  - Angr CTF
  - Rhme hardware hacking CTF
  - xorpd
+ - how2heap
